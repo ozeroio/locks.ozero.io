@@ -1,0 +1,97 @@
+<h2>Step 4: Testing It Out</h2>
+
+<p>
+  The final step is to test it out. If it does not work ensure your were operating the lock correctly: right,
+  left (passing the second number once), right.
+</p>
+
+<p>
+  The sticky number is the hardest number to find, recheck all your numbers and keep trying!
+</p>
+
+<h2>Again, here are the possibilities:</h2>
+
+<p *ngIf="stateManager.thirdDigitSet">
+  Because we tested the last number and it was looser. YES!
+</p>
+
+<table *ngIf="stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigit).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigit}}</td>
+  </tr>
+</table>
+
+<p *ngIf="!stateManager.thirdDigitSet">
+  Because we DID NOT test the last number. Bummer!
+</p>
+
+<table *ngIf="!stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigitPossibilities[0]).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigitPossibilities[0]}}</td>
+  </tr>
+</table>
+
+<p  *ngIf="!stateManager.thirdDigitSet">
+  Alternate possibility:
+</p>
+
+<table *ngIf="!stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigitPossibilities[1]).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigitPossibilities[1]}}</td>
+  </tr>
+</table>
+
+<p>
+  <button (click)="onPreviousStepClick()">Previous step</button>
+</p>

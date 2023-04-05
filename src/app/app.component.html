@@ -1,0 +1,15 @@
+<h1>How To Decode Dial Combo Locks</h1>
+<div>Credits: <a href="https://docs.google.com/document/u/0/d/1QhKZLDr22G0RpuTSGm0M6pz4dG82IByesim3elwfw98/mobilebasic">https://docs.google.com/document/u/0/d/1QhKZLDr22G0RpuTSGm0M6pz4dG82IByesim3elwfw98/mobilebasic</a></div>
+<div>Video: <a href="https://www.youtube.com/watch?v=27rE5ZvWLU0&ab_channel=HelpfulLockPicker">https://www.youtube.com/watch?v=27rE5ZvWLU0&ab_channel=HelpfulLockPicker</a></div>
+<div>You can follow the video & doc, or just let me help you with the math.</div>
+<hr>
+<div class="params" xmlns="http://www.w3.org/1999/html">
+  <div>Sticky Number: {{stateManager.stickyNumber}}</div>
+  <div *ngIf="stateManager.step > 2">Guess Numbers: {{stateManager.guessNumbers.join(", ")}}</div>
+  <div *ngIf="stateManager.step > 1"><b>First Digit</b>: {{stateManager.firstDigit}}</div>
+  <div *ngIf="stateManager.step > 2"><b>Third Digit</b>:
+    <span *ngIf="!stateManager.thirdDigitSet">{{stateManager.thirdDigitPossibilities.join(" or ")}}</span>
+    <span *ngIf="stateManager.thirdDigitSet">{{stateManager.thirdDigit}}</span>
+  </div>
+</div>
+<router-outlet></router-outlet>

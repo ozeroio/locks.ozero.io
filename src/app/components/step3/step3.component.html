@@ -1,0 +1,233 @@
+<h2>Step 3: The Math</h2>
+<img width="200" src="assets/math.png"/>
+<p>
+  <b>Part A: Finding The First Digit To Our Combo</b>
+</p>
+
+<p>
+  Add 5 to your sticky number and that is the first number to the combination.
+</p>
+
+<p>
+  {{stateManager.stickyNumber}} + 5 = <b>{{stateManager.stickyNumber + 5}}</b>
+</p>
+
+<p>
+  <b>Part B: Finding The 3rd Digit To Our Combo</b>
+</p>
+
+<p>
+  Next we are going to find the two possibilities to our last number.
+</p>
+
+<p>
+  Take your first number to the combo and divide it by 4 and note the remainder.
+</p>
+
+<p>
+  {{stateManager.firstDigit}} / 4 = {{(stateManager.firstDigit / 4).toFixed(0)}} with remainder of
+  <b>{{remainder}}</b>.
+</p>
+
+<p>
+  Remember (you don't need to) the remainder is <b>{{remainder}}</b>.
+</p>
+
+<p>
+  Next, take your two guess numbers and add 10 three times.
+</p>
+
+<table border="1">
+  <tr>
+    <td *ngFor="let i of table[0]">{{i}}</td>
+  </tr>
+  <tr>
+    <td *ngFor="let i of table[1]">{{i}}</td>
+  </tr>
+</table>
+
+<p>
+  Now, divide each number by 4, if the number has a remainder equal to the remainder you found earlier
+  (remainder of 0) it is a possibility.
+</p>
+
+<p>
+  {{stateManager.thirdDigitPossibilities[0]}} / 4 = {{(stateManager.thirdDigitPossibilities[0] / 4).toFixed(0)}} Remainder {{remainder}}
+</p>
+
+<p>
+  {{stateManager.thirdDigitPossibilities[1]}} / 4 = {{(stateManager.thirdDigitPossibilities[1] / 4).toFixed(0)}} Remainder {{remainder}}
+</p>
+
+<p>
+  {{stateManager.thirdDigitPossibilities[0]}} and {{stateManager.thirdDigitPossibilities[1]}} are two possibilities for your 3rd digit to
+  the combination.
+</p>
+
+<table border="1">
+  <tr>
+    <td class="validate" [ngClass]="{possibility: (i % 4) === remainder}" *ngFor="let i of table[0]">{{i}}</td>
+  </tr>
+  <tr>
+    <td class="validate" [ngClass]="{possibility: (i % 4) === remainder}" *ngFor="let i of table[1]">{{i}}</td>
+  </tr>
+</table>
+
+<p>
+  <b>** Optional Step**</b> Tension the shackle and turn clockwise go to the two numbers you found, the one that feels
+  looser is likely the correct number. This will leave you with only 8 possibilities!
+</p>
+
+<p>Click on the possibility bellow if you checked the looser one: </p>
+<button [ngClass]="{looser: stateManager.thirdDigitSet && stateManager.thirdDigit === stateManager.thirdDigitPossibilities[0]}" (click)="onLooserPossibilityClick(stateManager.thirdDigitPossibilities[0])">{{stateManager.thirdDigitPossibilities[0]}}</button>
+<button [ngClass]="{looser: stateManager.thirdDigitSet && stateManager.thirdDigit === stateManager.thirdDigitPossibilities[1]}" (click)="onLooserPossibilityClick(stateManager.thirdDigitPossibilities[1])">{{stateManager.thirdDigitPossibilities[1]}}</button>
+
+<p *ngIf="!stateManager.thirdDigitSet">So, up to this point we have found the first digit
+  ({{stateManager.firstDigit}}) and the last 2 possible digits to our lock ({{stateManager.thirdDigitPossibilities}})</p>
+<p *ngIf="stateManager.thirdDigitSet">So, up to this point we have found the first digit
+  ({{stateManager.firstDigit}}) and the last digit to our lock ({{stateManager.thirdDigit}})</p>
+
+<p>
+  <b>Part C: The Second Digit To Our Combo</b>
+</p>
+
+<p>
+  Time To Find Our 2nd Digit. This will give us 8 possibilities.
+</p>
+
+<p>
+  ** Warning: This may not make sense but this is what to do and not why it works.**.
+</p>
+
+<p>
+  So, take your remainder from earlier, we had Remainder = 0 and add 2.
+</p>
+
+<p>
+  {{remainder}} + 2 = {{remainder + 2}}. Take this number and add 8 to it 4 times (if you go over 39 it goes back to 0, ex 41 = 1).
+</p>
+
+<table border="1">
+  <tr>
+    <td *ngFor="let i of this.stateManager.secondDigitPossibilities.slice(0, 5)">{{i}}</td>
+  </tr>
+</table>
+
+<p>
+  Now take the previous number (the remainder of of {{remainder}} + 2) and add 4 to it.
+</p>
+
+<p>
+  {{remainder}} + 2 + 4= {{remainder + 6}} and add 8 to this number 4 times.
+</p>
+
+<table border="1">
+  <tr>
+    <td *ngFor="let i of this.stateManager.secondDigitPossibilities.slice(5, 10)">{{i}}</td>
+  </tr>
+</table>
+
+<p>
+  But WAIT, you said there were 8 possibilities, I see 10!
+</p>
+
+<p>
+  The 2nd and 3rd number can not be within 2 of each other and this eliminates 2 possibilities!
+</p>
+
+<p>
+  So lets RECAP. Now we have the 1st digit = {{stateManager.firstDigit}}, the 2nd digit with 8 possibilities,
+  and the 3rd digit with two possibilities but through testing it is likely 0 (it felt looser).
+</p>
+
+<p *ngIf="stateManager.thirdDigitSet">(YES, I KNOW! You clicked the button, the third digit is {{stateManager.thirdDigit}}... I'm just following the script.)</p>
+
+<p>
+  So here are our possibilities:
+</p>
+
+<p *ngIf="stateManager.thirdDigitSet">
+  Because we tested the last number and it was looser. YES!
+</p>
+
+<table *ngIf="stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigit).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigit}}</td>
+  </tr>
+</table>
+
+<p *ngIf="!stateManager.thirdDigitSet">
+  Because we DID NOT test the last number. Bummer!
+</p>
+
+<table *ngIf="!stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigitPossibilities[0]).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigitPossibilities[0]}}</td>
+  </tr>
+</table>
+
+<p  *ngIf="!stateManager.thirdDigitSet">
+  Alternate possibility:
+</p>
+
+<table *ngIf="!stateManager.thirdDigitSet">
+  <tr>
+    <td>1st digit:</td>
+    <td>{{stateManager.firstDigit}}</td>
+  </tr>
+  <tr>
+    <td>2nd digit:</td>
+    <td>
+      <table>
+        <tr>
+          <td *ngFor="let possibility of stateManager.secondDigitPossibilities; let i = index">
+            <span [ngClass]="{eliminated: ruledIndexFor(stateManager.thirdDigitPossibilities[1]).indexOf(i) >= 0}">{{possibility}}</span>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>3rd digit: </td>
+    <td>{{stateManager.thirdDigitPossibilities[1]}}</td>
+  </tr>
+</table>
+
+<p>
+  <button (click)="onPreviousStepClick()">Previous step</button>
+  <button (click)="onNextStepClick()">Next step</button>
+</p>

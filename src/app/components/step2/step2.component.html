@@ -1,0 +1,36 @@
+<h2>Step 2: Finding The Guess Numbers</h2>
+<img width="200" src="assets/lock-between-0-11.png"/>
+<p>
+  ** Please Remember the dial only has numbers 0-39 and when you cross over from 39 it goes back to 0 and not 40.
+</p>
+
+<p>
+  Guess Number (0-11)
+</p>
+
+<p>
+  The guess numbers fall from 0 to 11, now you need to set the dial to 0, apply heavy tension (more than what you did
+  for the sticky number) and turn the dial counter clockwise until it stops. You will need to find two numbers,
+  one even and one odd.
+</p>
+
+<p>
+  When the dial stops and if you can turn it back and forth between two half numbers the number in the middle is your
+  guess number. If your number falls on two exact numbers keep going.
+</p>
+
+<p>
+  The numbers in the middle are your guess numbers.
+</p>
+
+<p>
+  Guess Number 1 = <input type="number" [(ngModel)]="stateManager.guessNumbers[0]">
+  <br/>
+  Guess Number 2 = <input type="number" [(ngModel)]="stateManager.guessNumbers[1]">
+</p>
+
+<p>
+  <button (click)="onPreviousStepClick()">Previous step</button>
+  <button (click)="onNextStepClick()">Next step</button>
+</p>
+

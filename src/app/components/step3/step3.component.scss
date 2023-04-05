@@ -1,0 +1,18 @@
+td {
+  &.validate {
+    background: red;
+  }
+  &.possibility {
+    background: green;
+  }
+  padding: 8px;
+}
+
+.looser {
+  background: green;
+}
+
+.eliminated {
+  background: red;
+  text-decoration: line-through;
+}

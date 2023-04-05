@@ -1,0 +1,28 @@
+<h2>Step 1: Finding The Sticky Number</h2>
+<img width="200" src="assets/lock-rotate-clockwise.png" />
+<p>
+  This is the first step. To find the sticky number you need to turn the dial clockwise around 3 times, pull tension on
+  the shackle (a medium tension) and turn the dial clockwise until you find a number that sticks (it is best to do this
+  with your eyes closed). Once you find the number where it starts to stick, write it down. It is a number where you
+  start to meet resistance and you almost feel like you need to push past a hump to get through it.
+</p>
+
+<p>
+  ** Note: This is the hardest number to decode and it is also the most important.
+  If you get this number incorrect it will throw off the remainder of the steps. The best thing you can do is try to
+  find the number that you get most consistently and that is often it.
+</p>
+
+<p>
+  How much tension do you need? Pull on the shackle hard until you seize the whole lock, reduce tension until you can
+  start to turn the dial clockwise freely.
+</p>
+
+<p>
+  Sticky Number = <input type="number" [(ngModel)]="stateManager.stickyNumber">
+</p>
+
+<p>
+  <button (click)="onNextStepClick()">Next step</button>
+</p>
+
